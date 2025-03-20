@@ -10,8 +10,6 @@ data: list = json.load(open(json_url))
 ######################################################################
 # RETURN HEALTH OF THE APP
 ######################################################################
-
-
 @app.route("/health")
 def health():
     return jsonify(dict(status="OK")), 200
@@ -19,8 +17,6 @@ def health():
 ######################################################################
 # COUNT THE NUMBER OF PICTURES
 ######################################################################
-
-
 @app.route("/count")
 def count():
     """return length of data"""
@@ -28,7 +24,6 @@ def count():
         return jsonify(length=len(data)), 200
 
     return {"message": "Internal server error"}, 500
-
 
 ######################################################################
 # GET ALL PICTURES
@@ -40,8 +35,6 @@ def get_pictures():
 ######################################################################
 # GET A PICTURE
 ######################################################################
-
-
 @app.route("/picture/<int:id>", methods=["GET"])
 def get_picture_by_id(id):
     for pic in data:
@@ -49,8 +42,6 @@ def get_picture_by_id(id):
             return jsonify(pic), 200
     
     return {"message": "Picture not found"}, 404
-
-
 
 ######################################################################
 # CREATE A PICTURE
@@ -68,8 +59,6 @@ def create_picture():
 ######################################################################
 # UPDATE A PICTURE
 ######################################################################
-
-
 @app.route("/picture/<int:id>", methods=["PUT"])
 def update_picture(id):
     new_pic = request.get_json()
@@ -78,7 +67,6 @@ def update_picture(id):
             pic.update(new_pic)
             return {"message": "picture changed successfully"}, 200
     return {"message": "picture not found"}, 404
-
 
 ######################################################################
 # DELETE A PICTURE
